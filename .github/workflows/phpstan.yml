@@ -11,6 +11,9 @@ on:
       - 'phpstan.neon.dist'
 
 
+permissions:
+  contents: read
+
 jobs:
   phpstan:
     name: phpstan
@@ -19,13 +22,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: '8.0'
           coverage: none
 
       - name: Install composer dependencies
-        uses: ramsey/composer-install@v1
+        uses: ramsey/composer-install@994bb194a4fefcf39449ccf0f7766a4318f1ac76 # v1
 
       - name: Run PHPStan
         run: ./vendor/bin/phpstan --error-format=github

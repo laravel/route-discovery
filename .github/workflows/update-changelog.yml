@@ -4,24 +4,28 @@ on:
   release:
     types: [released]
 
+permissions:
+  contents: read
+
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
         with:
+          persist-credentials: false
           ref: main
 
       - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
+        uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
         with:
           latest-version: ${{ github.event.release.name }}
           release-notes: ${{ github.event.release.body }}
 
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # v4
         with:
           branch: main
           commit_message: Update CHANGELOG
